@@ -23,4 +23,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "PDM-Course-00182122"
-include(":app")
+include(":basic-concepts-jetpack-compose")
