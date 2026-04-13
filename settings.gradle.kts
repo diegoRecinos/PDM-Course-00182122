@@ -25,3 +25,4 @@ dependencyResolutionManagement {
 rootProject.name = "PDM-Course-00182122"
 include(":ex1-basic-concepts-jetpack-compose")
 include(":ex2-task-admin")
+include(":ex-dice-roller")
