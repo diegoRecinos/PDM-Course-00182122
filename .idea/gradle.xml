@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/ex-dice-roller" />
+            <option value="$PROJECT_DIR$/ex-tip-calculator" />
             <option value="$PROJECT_DIR$/ex1-basic-concepts-jetpack-compose" />
             <option value="$PROJECT_DIR$/ex2-task-admin" />
           </set>
