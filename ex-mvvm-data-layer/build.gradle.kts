@@ -1,15 +1,13 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    //nav3 routes serialization plugin
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
     namespace = "com.pdm0126.ex_mvvm_data_layer_n"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.pdm0126.ex_mvvm_data_layer_n"
@@ -71,7 +69,6 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 
-
-    // ... otras dependenciasimplementation("androidx.compose.material:material-icons-core")
+    // material icons
     implementation(libs.androidx.compose.material.icons.extended)
 }
