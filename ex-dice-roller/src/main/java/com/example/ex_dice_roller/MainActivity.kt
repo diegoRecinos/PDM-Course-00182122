@@ -16,7 +16,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
-//También deberás usar las siguientes declaraciones de importación para importar las funciones de extensión necesarias del estado:
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 
