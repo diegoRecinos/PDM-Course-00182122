@@ -1,5 +1,6 @@
 package com.pdm0126.ex_mvvm_data_layer_n.screens.MovieDetail
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,15 +11,21 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.pdm0126.ex_mvvm_data_layer_n.dummy.dummyMovies
 import com.pdm0126.ex_mvvm_data_layer_n.components.AppScaffold
@@ -27,9 +34,29 @@ import com.pdm0126.ex_mvvm_data_layer_n.dummy.dummyMovies
 @Composable
 fun MovieDetailScreen(
   movieId: Int,
-  navigateBack: () -> Unit
+  navigateBack: () -> Unit,
+  viewModel: MovieDetailViewModel = viewModel()
 ) {
-  val movie = dummyMovies.find { it.id == movieId }
+  //val movie = dummyMovies.find { it.id == movieId }
+
+  //observar el estado del ViewModel
+  val movie by viewModel.movie.collectAsState()
+
+  val loading by viewModel.loading.collectAsState()
+
+  //cargar la pelicula
+  LaunchedEffect(movieId) {
+    viewModel.loadMovieById(movieId)
+  }
+
+  if (loading) {
+    AppScaffold(title = "Loading") { padding ->
+      Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
+        CircularProgressIndicator()
+      }
+    }
+    return
+  }
 
   AppScaffold(
     title = movie?.title ?: "Detail",
