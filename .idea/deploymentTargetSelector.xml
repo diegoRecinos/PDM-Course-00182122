@@ -14,7 +14,16 @@
       <SelectionState runConfigName="ex-tip-calculator">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ex-mvvm-data-layer">
+      <SelectionState runConfigName="ex-rankeuca-room">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="MainActivity">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="ex-api-json-placeholder">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="ex-mvvm-data-movies">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

@@ -9,8 +9,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ex-api-json-placeholder" />
             <option value="$PROJECT_DIR$/ex-dice-roller" />
-            <option value="$PROJECT_DIR$/ex-mvvm-data-layer" />
+            <option value="$PROJECT_DIR$/ex-mvvm-data-movies" />
+            <option value="$PROJECT_DIR$/ex-rankeuca-room" />
             <option value="$PROJECT_DIR$/ex-tip-calculator" />
             <option value="$PROJECT_DIR$/ex1-basic-concepts-jetpack-compose" />
             <option value="$PROJECT_DIR$/ex2-task-admin" />
