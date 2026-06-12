@@ -24,4 +24,7 @@ class OptionRepositoryImpl(
     override suspend fun deleteOption(option: Option) {
         optionDao.deleteOption(option.toEntity())
     }
+
+    override suspend fun voteOption(optionId: Int) = optionDao.incrementVotes(optionId)
+    override suspend fun resetVotes() = optionDao.resetAllVotes()
 }

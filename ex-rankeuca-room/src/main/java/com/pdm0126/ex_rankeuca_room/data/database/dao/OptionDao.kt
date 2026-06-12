@@ -19,4 +19,10 @@ interface OptionDao {
 
     @Delete
     suspend fun deleteOption(option: OptionEntity)
+
+    @Query("UPDATE options SET votes = votes + 1 WHERE id = :optionId")
+    suspend fun incrementVotes(optionId: Int)
+
+    @Query("UPDATE options SET votes = 0")
+    suspend fun resetAllVotes()
 }

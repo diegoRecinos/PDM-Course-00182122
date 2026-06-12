@@ -7,4 +7,7 @@ interface OptionRepository {
     fun getOptions(): Flow<List<Option>>
     suspend fun addOption(option: Option)
     suspend fun deleteOption(option: Option)
+
+    suspend fun voteOption(optionId: Int)
+    suspend fun resetVotes()
 }
