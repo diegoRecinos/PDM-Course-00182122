@@ -6,10 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.pdm0126.ex_rankeuca_room.data.api.KtorClient
 import com.pdm0126.ex_rankeuca_room.data.model.Option
 import com.pdm0126.ex_rankeuca_room.data.repository.ApiRepository
+import com.pdm0126.ex_rankeuca_room.data.repository.OptionRepository
 import com.pdm0126.ex_rankeuca_room.data.repository.RepositoryInterface
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -22,15 +26,28 @@ data class HomeScreenUIState(
     val selectedOptionId: Int? = null
 )
 
-class HomeScreenViewModel(): ViewModel() {
+class HomeScreenViewModel(
+    private val repository: OptionRepository
+): ViewModel() {
 
-    private val repository: RepositoryInterface = ApiRepository(KtorClient.client)
+    //private val repository: RepositoryInterface = ApiRepository(KtorClient.client)
 
+    //se queda abierto escuchando a Room
+    val uiState: StateFlow<HomeScreenUIState> = repository.getOptions()
+        .map { options ->
+            HomeScreenUIState(options = options.sortedByDescending { it.votes })
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = HomeScreenUIState(isLoading = true)
+        )
     private val _uiState = MutableStateFlow(HomeScreenUIState())
-    val uiState: StateFlow<HomeScreenUIState> = _uiState.asStateFlow()
+    // uiState: StateFlow<HomeScreenUIState> = _uiState.asStateFlow()
 
     init {
-        fetchOptions()
+        //fetchOptions()
+        viewModelScope.launch {repository.refreshOptions()}
     }
 
     fun fetchOptions() {

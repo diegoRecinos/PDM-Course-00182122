@@ -8,6 +8,7 @@ interface OptionRepository {
     suspend fun addOption(option: Option)
     suspend fun deleteOption(option: Option)
 
+    suspend fun refreshOptions()
     suspend fun voteOption(optionId: Int)
     suspend fun resetVotes()
 }
