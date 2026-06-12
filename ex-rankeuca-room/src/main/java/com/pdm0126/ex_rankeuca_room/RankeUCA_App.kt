@@ -14,7 +14,9 @@ import java.util.Map.entry
 @Composable
 fun RankeUCA_App() {
   val backStack = rememberNavBackStack(Routes.Home)
-  val homeViewModel: HomeScreenViewModel = viewModel()
+  val homeViewModel: HomeScreenViewModel = viewModel(
+    factory = HomeScreenViewModel.Factory
+  )
   val resultViewModel: ResultScreenViewModel = viewModel()
 
   NavDisplay(
