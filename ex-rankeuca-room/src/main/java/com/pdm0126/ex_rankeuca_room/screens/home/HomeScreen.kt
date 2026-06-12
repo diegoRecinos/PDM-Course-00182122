@@ -37,7 +37,7 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 fun HomeScreen(
   onNavigateToResultScreen: () -> Unit,
   modifier: Modifier = Modifier,
-  viewModel: HomeScreenViewModel = viewModel()
+  viewModel: HomeScreenViewModel = viewModel(factory = HomeScreenViewModel.Factory)
 ) {
 
   val uiState by viewModel.uiState.collectAsState()
