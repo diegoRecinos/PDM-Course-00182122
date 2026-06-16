@@ -1,5 +1,6 @@
-package com.pdm0126.ex_rankeuca_room.screens.options
+package com.pdm0126.ex_rankeuca_room.screens.questions
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,7 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DeleteOutline
-import androidx.compose.material.icons.filled.Inbox
+import androidx.compose.material.icons.filled.HelpOutline
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -39,29 +40,30 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OptionsScreen(
-    questionId: Int,
+fun QuestionsScreen(
+    onQuestionClick: (Int) -> Unit,
     onBack: () -> Unit,
-    viewModel: OptionsViewModel = viewModel(
-        factory = OptionsViewModel.provideFactory(questionId)
-    )
+    viewModel: QuestionsViewModel = viewModel(factory = QuestionsViewModel.Factory)
 ) {
-    val options by viewModel.options.collectAsStateWithLifecycle()
+    val questions by viewModel.questions.collectAsStateWithLifecycle()
     var showSheet by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
         topBar = {
             TopAppBar(
-                title = { Text("Administrar opciones") },
+                title = { Text("Preguntas") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Volver")
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Volver"
+                        )
                     }
                 },
                 actions = {
                     TextButton(onClick = { showSheet = true }) {
-                        Icon(imageVector = Icons.Default.Add, contentDescription = "Nueva opción")
+                        Icon(imageVector = Icons.Default.Add, contentDescription = "Nueva pregunta")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("Nuevo")
                     }
@@ -78,22 +80,21 @@ fun OptionsScreen(
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp, vertical = 12.dp)
         ) {
-
-            if (options.isEmpty()) {
+            if (questions.isEmpty()) {
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Inbox,
+                        imageVector = Icons.Default.HelpOutline,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.outline,
                         modifier = Modifier.height(36.dp)
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     Text(
-                        text = "Todavia no hay opciones",
+                        text = "Todavía no hay preguntas",
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
@@ -108,27 +109,29 @@ fun OptionsScreen(
                     contentPadding = PaddingValues(vertical = 4.dp),
                     verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    items(items = options, key = { it.id }) { option ->
-                        ElevatedCard {
+                    items(items = questions, key = { it.id }) { question ->
+                        ElevatedCard(
+                            modifier = Modifier.clickable { onQuestionClick(question.id) }
+                        ) {
                             ListItem(
                                 headlineContent = {
                                     Text(
-                                        text = option.name,
+                                        text = question.title,
                                         style = MaterialTheme.typography.titleMedium
                                     )
                                 },
                                 supportingContent = {
                                     Text(
-                                        text = option.imageUrl,
+                                        text = "${question.optionCount} opciones",
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                 },
                                 trailingContent = {
-                                    IconButton(onClick = { viewModel.deleteOption(option) }) {
+                                    IconButton(onClick = { viewModel.deleteQuestion(question) }) {
                                         Icon(
                                             imageVector = Icons.Default.DeleteOutline,
-                                            contentDescription = "Borrar ${option.name}",
+                                            contentDescription = "Borrar ${question.title}",
                                             tint = MaterialTheme.colorScheme.error
                                         )
                                     }
@@ -142,9 +145,9 @@ fun OptionsScreen(
     }
 
     if (showSheet) {
-        OptionBottomSheet(
-            onSave = { name, imageUrl ->
-                viewModel.addOption(name, imageUrl)
+        QuestionBottomSheet(
+            onSave = { title ->
+                viewModel.addQuestion(title)
             },
             onDismiss = { showSheet = false }
         )

@@ -10,6 +10,7 @@ import com.pdm0126.ex_rankeuca_room.screens.home.HomeScreenViewModel
 import com.pdm0126.ex_rankeuca_room.screens.resultscreen.ResultScreen
 import com.pdm0126.ex_rankeuca_room.screens.resultscreen.ResultScreenViewModel
 import com.pdm0126.ex_rankeuca_room.screens.options.OptionsScreen
+import com.pdm0126.ex_rankeuca_room.screens.questions.QuestionsScreen
 
 @Composable
 fun RankeUCA_App() {
@@ -31,7 +32,7 @@ fun RankeUCA_App() {
             backStack.add(Routes.ResultScreen)
           },
           onNavigateToOptions = {
-            backStack.add(Routes.Options)
+            backStack.add(Routes.Questions)
           }
         )
       }
@@ -45,8 +46,19 @@ fun RankeUCA_App() {
           }
         )
       }
-      entry<Routes.Options> {
-        OptionsScreen()
+      entry<Routes.Questions> {
+        QuestionsScreen(
+          onQuestionClick = { id ->
+            backStack.add(Routes.Options(questionId = id))
+          },
+          onBack = { backStack.removeLastOrNull() }
+        )
+      }
+      entry<Routes.Options> { route ->
+        OptionsScreen(
+          questionId = route.questionId,
+          onBack = { backStack.removeLastOrNull() }
+        )
       }
     },
   )
