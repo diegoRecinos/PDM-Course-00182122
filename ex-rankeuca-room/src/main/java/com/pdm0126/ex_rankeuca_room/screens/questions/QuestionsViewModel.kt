@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.screens.options
+package com.pdm0126.ex_rankeuca_room.screens.questions
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -6,46 +6,42 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.pdm0126.ex_rankeuca_room.RankeUcaApplication
-import com.pdm0126.ex_rankeuca_room.data.model.Option
-import com.pdm0126.ex_rankeuca_room.data.repository.OptionRepository
+import com.pdm0126.ex_rankeuca_room.data.model.Question
+import com.pdm0126.ex_rankeuca_room.data.repository.QuestionRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class OptionsViewModel(
-    private val questionId: Int,
-    private val optionRepository: OptionRepository
+class QuestionsViewModel(
+    private val questionRepository: QuestionRepository
 ) : ViewModel() {
 
-    val options: StateFlow<List<Option>> =
-        optionRepository.getOptions(questionId)
+    val questions: StateFlow<List<Question>> =
+        questionRepository.getQuestions()
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = emptyList()
             )
 
-    fun addOption(name: String, imageUrl: String) {
+    fun addQuestion(title: String) {
         viewModelScope.launch {
-            optionRepository.addOption(name, imageUrl, questionId)
+            questionRepository.addQuestion(title)
         }
     }
 
-    fun deleteOption(option: Option) {
+    fun deleteQuestion(question: Question) {
         viewModelScope.launch {
-            optionRepository.deleteOption(option)
+            questionRepository.deleteQuestion(question)
         }
     }
 
     companion object {
-        fun provideFactory(questionId: Int) = viewModelFactory {
+        val Factory = viewModelFactory {
             initializer {
                 val app = this[APPLICATION_KEY] as RankeUcaApplication
-                OptionsViewModel(
-                    questionId = questionId,
-                    optionRepository = app.appProvider.provideOptionRepository()
-                )
+                QuestionsViewModel(app.appProvider.provideQuestionRepository())
             }
         }
     }
