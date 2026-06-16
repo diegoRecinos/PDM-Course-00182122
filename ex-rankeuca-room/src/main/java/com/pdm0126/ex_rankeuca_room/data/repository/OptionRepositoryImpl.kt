@@ -13,14 +13,18 @@ class OptionRepositoryImpl(
     private val apiRepository: ApiRepository
 ) : OptionRepository {
 
-    //1 flujo vivo la ui siempre lo mira
-    override fun getOptions(): Flow<List<Option>> {
-        //devuelve en vivo la lista de opciones
-        return optionDao.getAllOptions().map { entities ->
+//    //1 flujo vivo la ui siempre lo mira
+//    override fun getOptions(): Flow<List<Option>> {
+//        //devuelve en vivo la lista de opciones
+//        return optionDao.getAllOptions().map { entities ->
+//            entities.map { it.toModel() }
+//        }
+//    }
+    override fun getOptions(questionId: Int): Flow<List<Option>> {
+        return optionDao.getOptionsForQuestion(questionId).map { entities ->
             entities.map { it.toModel() }
         }
     }
-
     override suspend fun refreshOptions() {
         // 1. Pedimos a la API
         val result = apiRepository.getOptions()
@@ -48,7 +52,11 @@ class OptionRepositoryImpl(
         }
     }
 
-    override suspend fun addOption(option: Option) {
+//    override suspend fun addOption(option: Option) {
+//        optionDao.insertOption(option.toEntity())
+//    }
+    override suspend fun addOption(name: String, imageUrl: String, questionId: Int) {
+        val option = Option(name = name, imageUrl = imageUrl, questionId = questionId)
         optionDao.insertOption(option.toEntity())
     }
 
