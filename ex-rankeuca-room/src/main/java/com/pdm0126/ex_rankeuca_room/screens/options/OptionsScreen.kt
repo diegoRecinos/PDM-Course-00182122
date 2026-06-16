@@ -43,6 +43,7 @@ fun OptionsScreen(
     questionId: Int,
     onBack: () -> Unit,
     viewModel: OptionsViewModel = viewModel(
+        key = "OptionsViewModel_$questionId",
         factory = OptionsViewModel.provideFactory(questionId)
     )
 ) {
