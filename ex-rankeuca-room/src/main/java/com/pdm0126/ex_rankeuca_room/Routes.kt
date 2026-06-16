@@ -8,8 +8,8 @@ sealed class Routes : NavKey {
   data object Home : Routes()
 
   @Serializable
-  data object ResultScreen : Routes() {
+  data object ResultScreen : Routes()
 
-  }
-
+  @Serializable
+  data object Options : Routes()
 }
