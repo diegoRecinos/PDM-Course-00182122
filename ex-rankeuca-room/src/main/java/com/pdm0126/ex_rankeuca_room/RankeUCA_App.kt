@@ -9,7 +9,7 @@ import com.pdm0126.ex_rankeuca_room.screens.home.HomeScreen
 import com.pdm0126.ex_rankeuca_room.screens.home.HomeScreenViewModel
 import com.pdm0126.ex_rankeuca_room.screens.resultscreen.ResultScreen
 import com.pdm0126.ex_rankeuca_room.screens.resultscreen.ResultScreenViewModel
-import java.util.Map.entry
+import com.pdm0126.ex_rankeuca_room.screens.options.OptionsScreen
 
 @Composable
 fun RankeUCA_App() {
@@ -29,6 +29,9 @@ fun RankeUCA_App() {
           onNavigateToResultScreen = {
             resultViewModel.fetchOptions()
             backStack.add(Routes.ResultScreen)
+          },
+          onNavigateToOptions = {
+            backStack.add(Routes.Options)
           }
         )
       }
@@ -42,9 +45,9 @@ fun RankeUCA_App() {
           }
         )
       }
-
+      entry<Routes.Options> {
+        OptionsScreen()
+      }
     },
   )
-
-
 }
