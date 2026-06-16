@@ -18,7 +18,9 @@ fun RankeUCA_App() {
   val homeViewModel: HomeScreenViewModel = viewModel(
     factory = HomeScreenViewModel.Factory
   )
-  val resultViewModel: ResultScreenViewModel = viewModel()
+  val resultViewModel: ResultScreenViewModel = viewModel(
+    factory = ResultScreenViewModel.Factory
+  )
 
   NavDisplay(
     backStack = backStack,

@@ -1,75 +1,64 @@
 package com.pdm0126.ex_rankeuca_room.screens.resultscreen
 
-import android.util.Log.e
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
-import com.pdm0126.ex_rankeuca_room.data.api.KtorClient
-import com.pdm0126.ex_rankeuca_room.data.repository.ApiRepository
-import com.pdm0126.ex_rankeuca_room.data.repository.RepositoryInterface
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.pdm0126.ex_rankeuca_room.RankeUcaApplication
+import com.pdm0126.ex_rankeuca_room.data.repository.OptionRepository
 import com.pdm0126.ex_rankeuca_room.screens.home.HomeScreenUIState
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+class ResultScreenViewModel(
+    private val repository: OptionRepository
+) : ViewModel() {
 
-class ResultScreenViewModel() : ViewModel()
-{
-    private val repository: RepositoryInterface = ApiRepository(KtorClient.client)
+    private val _internalState = MutableStateFlow(HomeScreenUIState())
 
-    private val _uiState = MutableStateFlow(HomeScreenUIState())
-    val uiState: StateFlow<HomeScreenUIState> = _uiState.asStateFlow()
-
-    init {
-        fetchOptions()
-    }
+    val uiState: StateFlow<HomeScreenUIState> = combine(
+        repository.getOptions(),
+        _internalState
+    ) { options, internal ->
+        internal.copy(
+            options = options.sortedByDescending { it.votes },
+            isLoading = false
+        )
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = HomeScreenUIState(isLoading = true)
+    )
 
     fun fetchOptions() {
-        viewModelScope.launch{
+        // En Room local, los cambios fluyen automáticamente por el Flow.
+    }
+
+    fun resetAllVotes() {
+        viewModelScope.launch {
+            _internalState.update { it.copy(isLoading = true) }
             try {
-                _uiState.update { it.copy(isLoading = true, error = null) }
-                repository.getOptions()
-                    .onSuccess { options -> 
-                        _uiState.update { 
-                            it.copy(
-                                options = options.sortedByDescending { it.votes }, 
-                                isLoading = false
-                            ) 
-                        }
-                    }
-                    .onFailure { error -> 
-                        _uiState.update { it.copy(error = error.message, isLoading = false) } 
-                    }
+                repository.resetVotes()
+                _internalState.update { it.copy(isLoading = false) }
             } catch (e: Exception) {
-                e("ResultScreenViewModel", "Error fetching options: ${e.message}", e)
-                _uiState.update { it.copy(error = e.message, isLoading = false) }
+                _internalState.update { it.copy(isLoading = false, error = e.message) }
             }
         }
     }
 
-    fun resetAllVotes(){
-        viewModelScope.launch {
-            try {
-                _uiState.update { it.copy(isLoading = true, error = null) }
-                repository.resetVotes()
-                    .onSuccess {
-                        _uiState.update { it.copy(
-                                hasVoted = false,
-                                selectedOptionId = null,
-                                isLoading = false
-                            )
-                        }
-                        fetchOptions()
-                    }
-                    .onFailure { error -> 
-                        _uiState.update { it.copy(isLoading = false, error = error.message) }
-                    }
-            } catch (e: Exception) {
-                e("ResultScreenViewModel", "Error resetting votes: ${e.message}", e)
-                _uiState.update { it.copy(error = e.message, isLoading = false) }
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val app = this[APPLICATION_KEY] as RankeUcaApplication
+                ResultScreenViewModel(app.appProvider.provideOptionRepository())
             }
-
         }
     }
 }
