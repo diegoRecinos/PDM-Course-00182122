@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.pdm0126.ex_mvvm_data_layer_n"
+    namespace = "com.pdm0126.ex_movies"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.pdm0126.ex_mvvm_data_layer_n"
+        applicationId = "com.pdm0126.ex_movies"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

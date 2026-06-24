@@ -16,6 +16,14 @@
       </SelectionState>
       <SelectionState runConfigName="ex-rankeuca-room">
         <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2026-06-16T05:42:55.964088Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\orion\.android\avd\Medium_Phone_x.avd" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
       </SelectionState>
       <SelectionState runConfigName="ex-api-json-placeholder">
         <option name="selectionMode" value="DROPDOWN" />

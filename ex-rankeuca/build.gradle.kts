@@ -17,7 +17,7 @@ if (localPropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.pdm012026.ex_rankeuca_room"
+    namespace = "com.pdm012026.ex_rankeuca"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -25,7 +25,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.pdm012026.ex_rankeuca_room"
+        applicationId = "com.pdm012026.ex_rankeuca"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
