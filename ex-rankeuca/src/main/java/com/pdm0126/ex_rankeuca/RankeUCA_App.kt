@@ -11,10 +11,11 @@ import com.pdm0126.ex_rankeuca.screens.resultscreen.ResultScreen
 import com.pdm0126.ex_rankeuca.screens.resultscreen.ResultScreenViewModel
 import com.pdm0126.ex_rankeuca.screens.options.OptionsScreen
 import com.pdm0126.ex_rankeuca.screens.questions.QuestionsScreen
+import com.pdm0126.ex_rankeuca.screens.menu.MenuScreen
 
 @Composable
 fun RankeUCA_App() {
-  val backStack = rememberNavBackStack(Routes.Home)
+  val backStack = rememberNavBackStack(Routes.Menu)
   val homeViewModel: HomeScreenViewModel = viewModel(
     factory = HomeScreenViewModel.Factory
   )
@@ -26,6 +27,16 @@ fun RankeUCA_App() {
     backStack = backStack,
     onBack = { backStack.removeLastOrNull() },
     entryProvider = entryProvider {
+      entry<Routes.Menu> {
+        MenuScreen(
+          onNavigateToManager = {
+            backStack.add(Routes.Questions)
+          },
+          onNavigateToVote = {
+
+          }
+        )
+      }
       entry<Routes.Home> {
         HomeScreen(
           viewModel = homeViewModel,
