@@ -32,6 +32,12 @@ class OptionsViewModel(
         }
     }
 
+    fun updateOption(option: Option) {
+        viewModelScope.launch {
+            optionRepository.updateOption(option)
+        }
+    }
+
     fun deleteOption(option: Option) {
         viewModelScope.launch {
             optionRepository.deleteOption(option)

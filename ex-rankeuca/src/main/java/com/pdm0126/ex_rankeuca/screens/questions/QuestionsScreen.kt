@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -15,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DeleteOutline
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.HelpOutline
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -37,7 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.pdm0126.ex_rankeuca_room.screens.questions.QuestionsViewModel
+import com.pdm0126.ex_rankeuca.data.model.Question
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,6 +50,7 @@ fun QuestionsScreen(
 ) {
     val questions by viewModel.questions.collectAsStateWithLifecycle()
     var showSheet by rememberSaveable { mutableStateOf(false) }
+    var selectedQuestion by rememberSaveable { mutableStateOf<Question?>(null) }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
@@ -63,7 +66,10 @@ fun QuestionsScreen(
                     }
                 },
                 actions = {
-                    TextButton(onClick = { showSheet = true }) {
+                    TextButton(onClick = {
+                        selectedQuestion = null
+                        showSheet = true
+                    }) {
                         Icon(imageVector = Icons.Default.Add, contentDescription = "Nueva pregunta")
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("Nuevo")
@@ -129,12 +135,24 @@ fun QuestionsScreen(
                                     )
                                 },
                                 trailingContent = {
-                                    IconButton(onClick = { viewModel.deleteQuestion(question) }) {
-                                        Icon(
-                                            imageVector = Icons.Default.DeleteOutline,
-                                            contentDescription = "Borrar ${question.title}",
-                                            tint = MaterialTheme.colorScheme.error
-                                        )
+                                    Row {
+                                        IconButton(onClick = {
+                                            selectedQuestion = question
+                                            showSheet = true
+                                        }) {
+                                            Icon(
+                                                imageVector = Icons.Default.Edit,
+                                                contentDescription = "Editar ${question.title}",
+                                                tint = MaterialTheme.colorScheme.primary
+                                            )
+                                        }
+                                        IconButton(onClick = { viewModel.deleteQuestion(question) }) {
+                                            Icon(
+                                                imageVector = Icons.Default.DeleteOutline,
+                                                contentDescription = "Borrar ${question.title}",
+                                                tint = MaterialTheme.colorScheme.error
+                                            )
+                                        }
                                     }
                                 }
                             )
@@ -147,10 +165,18 @@ fun QuestionsScreen(
 
     if (showSheet) {
         QuestionBottomSheet(
+            question = selectedQuestion,
             onSave = { title ->
-                viewModel.addQuestion(title)
+                if (selectedQuestion == null) {
+                    viewModel.addQuestion(title)
+                } else {
+                    viewModel.updateQuestion(selectedQuestion!!.copy(title = title))
+                }
             },
-            onDismiss = { showSheet = false }
+            onDismiss = {
+                showSheet = false
+                selectedQuestion = null
+            }
         )
     }
 }

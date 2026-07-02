@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.screens.questions
+package com.pdm0126.ex_rankeuca.screens.questions
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -28,6 +28,12 @@ class QuestionsViewModel(
     fun addQuestion(title: String) {
         viewModelScope.launch {
             questionRepository.addQuestion(title)
+        }
+    }
+
+    fun updateQuestion(question: Question) {
+        viewModelScope.launch {
+            questionRepository.updateQuestion(question)
         }
     }
 

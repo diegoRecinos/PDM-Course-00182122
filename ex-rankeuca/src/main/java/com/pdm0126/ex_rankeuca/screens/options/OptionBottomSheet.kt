@@ -23,18 +23,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.pdm0126.ex_rankeuca.data.model.Option
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OptionBottomSheet(
+    option: Option? = null,
     onSave: (name: String, imageUrl: String) -> Unit,
     onDismiss: () -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState()
-    var name by rememberSaveable { mutableStateOf("") }
-    var imageUrl by rememberSaveable { mutableStateOf("") }
+    var name by rememberSaveable { mutableStateOf(option?.value ?: "") }
+    var imageUrl by rememberSaveable { mutableStateOf(option?.imageUrl ?: "") }
 
     val isValid = name.isNotBlank() && imageUrl.isNotBlank()
+    val isEditing = option != null
 
     ModalBottomSheet(
         sheetState = sheetState,
@@ -48,12 +51,12 @@ fun OptionBottomSheet(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = "Nueva opción",
+                text = if (isEditing) "Editar opción" else "Nueva opción",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = "Agrega nombre e imagen para que aparezca en la lista.",
+                text = if (isEditing) "Modifica los datos de la opción." else "Agrega nombre e imagen para que aparezca en la lista.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

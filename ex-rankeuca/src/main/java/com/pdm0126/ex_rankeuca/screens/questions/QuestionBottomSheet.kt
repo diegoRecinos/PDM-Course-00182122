@@ -23,17 +23,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.pdm0126.ex_rankeuca.data.model.Question
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuestionBottomSheet(
+    question: Question? = null,
     onSave: (title: String) -> Unit,
     onDismiss: () -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState()
-    var title by rememberSaveable { mutableStateOf("") }
+    var title by rememberSaveable { mutableStateOf(question?.title ?: "") }
 
     val isValid = title.isNotBlank()
+    val isEditing = question != null
 
     ModalBottomSheet(
         sheetState = sheetState,
@@ -47,12 +50,12 @@ fun QuestionBottomSheet(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = "Nueva pregunta",
+                text = if (isEditing) "Editar pregunta" else "Nueva pregunta",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = "Ingresa el título de la nueva pregunta o votación.",
+                text = if (isEditing) "Modifica el título de la pregunta." else "Ingresa el título de la nueva pregunta o votación.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

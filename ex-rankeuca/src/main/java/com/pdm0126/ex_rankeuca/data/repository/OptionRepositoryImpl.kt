@@ -1,11 +1,10 @@
-package com.pdm0126.ex_rankeuca_room.data.repository
+package com.pdm0126.ex_rankeuca.data.repository
 
 import com.pdm0126.ex_rankeuca.data.database.dao.OptionDao
 import com.pdm0126.ex_rankeuca.data.database.entity.toEntity
 import com.pdm0126.ex_rankeuca.data.database.entity.toModel
 import kotlinx.coroutines.flow.map
 import com.pdm0126.ex_rankeuca.data.model.Option
-import com.pdm0126.ex_rankeuca.data.repository.OptionRepository
 import kotlinx.coroutines.flow.Flow
 
 class OptionRepositoryImpl(
@@ -44,6 +43,10 @@ class OptionRepositoryImpl(
             votes = 0
         )
         optionDao.insertOption(option.toEntity())
+    }
+
+    override suspend fun updateOption(option: Option) {
+        optionDao.updateOption(option.toEntity())
     }
 
     override suspend fun deleteOption(option: Option) {

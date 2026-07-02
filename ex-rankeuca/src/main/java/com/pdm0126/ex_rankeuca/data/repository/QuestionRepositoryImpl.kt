@@ -21,6 +21,10 @@ class QuestionRepositoryImpl(
         questionDao.insertQuestion(QuestionEntity(title = title))
     }
 
+    override suspend fun updateQuestion(question: Question) {
+        questionDao.updateQuestion(QuestionEntity(id = question.id, title = question.title))
+    }
+
     override suspend fun deleteQuestion(question: Question) {
         questionDao.deleteQuestion(QuestionEntity(id = question.id, title = question.title))
     }

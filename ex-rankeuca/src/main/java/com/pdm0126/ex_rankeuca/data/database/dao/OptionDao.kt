@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.pdm0126.ex_rankeuca.data.database.entity.OptionEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -19,6 +20,9 @@ interface OptionDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOption(option: OptionEntity)
+
+    @Update
+    suspend fun updateOption(option: OptionEntity)
 
     @Delete
     suspend fun deleteOption(option: OptionEntity)
