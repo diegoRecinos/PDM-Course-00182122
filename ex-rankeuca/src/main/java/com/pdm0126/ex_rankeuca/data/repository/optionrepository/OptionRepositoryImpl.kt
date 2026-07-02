@@ -12,7 +12,7 @@ class OptionRepositoryImpl(
     private val optionDao: OptionDao
 ) : OptionRepository {
 
-    // read: sale de room, son reactivos flow
+    // read: sale de room, son reactivos flow la UI siempre observa esto
     override fun getOptions(): Flow<List<Option>> {
         return optionDao.getAllOptions().map { entities ->
             entities.map { it.toModel() }
@@ -26,8 +26,15 @@ class OptionRepositoryImpl(
     }
 
     // sincronizar: van a la API y guardan en room
+    // sincronizar: van a la API (DTO) -> Room (Entity)
+    // El Flow de arriba se encarga de actualizar la UI automáticamente
     override suspend fun refreshOptions() {
-
+        // En un caso real, aquí decidirías qué questionId usar
+        // o si la API trae el questionId dentro del DTO.
+//        val optionsDto = fetchOptionsFromApi()
+//
+//        // Mapeo directo DTO -> Entity
+//        optionDao.upsertAll(optionsDto.map { it.toEntity(questionId = 1) })
     }
 
     override suspend fun voteOption(optionId: Int) {
@@ -45,7 +52,7 @@ class OptionRepositoryImpl(
             questionId = questionId,
             votes = 0
         )
-        optionDao.insertOption(option.toEntity())
+        optionDao.createOption(option.toEntity())
     }
 
     override suspend fun updateOption(option: Option) {

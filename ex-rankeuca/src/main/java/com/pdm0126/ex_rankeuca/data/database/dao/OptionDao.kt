@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import androidx.room.Upsert
 import com.pdm0126.ex_rankeuca.data.database.entity.OptionEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -18,8 +19,15 @@ interface OptionDao {
     @Query("SELECT * FROM options WHERE questionId = :questionId")
     fun getOptionsForQuestion(questionId: Int): Flow<List<OptionEntity>>
 
+    @Upsert
+    suspend fun upsertAllOptions(options: List<OptionEntity>)
+
+    @Upsert
+    suspend fun upsertOption(option: OptionEntity)
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOption(option: OptionEntity)
+    suspend fun createOption(option: OptionEntity)
 
     @Update
     suspend fun updateOption(option: OptionEntity)
