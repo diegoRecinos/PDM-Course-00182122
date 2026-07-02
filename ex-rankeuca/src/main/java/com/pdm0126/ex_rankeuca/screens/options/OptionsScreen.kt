@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.screens.options
+package com.pdm0126.ex_rankeuca.screens.options
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -44,7 +44,7 @@ fun OptionsScreen(
     onBack: () -> Unit,
     viewModel: OptionsViewModel = viewModel(
         key = "OptionsViewModel_$questionId",
-        factory = OptionsViewModel.provideFactory(questionId)
+        factory = OptionsViewModel.Companion.provideFactory(questionId)
     )
 ) {
     val options by viewModel.options.collectAsStateWithLifecycle()
@@ -114,7 +114,7 @@ fun OptionsScreen(
                             ListItem(
                                 headlineContent = {
                                     Text(
-                                        text = option.name,
+                                        text = option.value,
                                         style = MaterialTheme.typography.titleMedium
                                     )
                                 },
@@ -129,7 +129,7 @@ fun OptionsScreen(
                                     IconButton(onClick = { viewModel.deleteOption(option) }) {
                                         Icon(
                                             imageVector = Icons.Default.DeleteOutline,
-                                            contentDescription = "Borrar ${option.name}",
+                                            contentDescription = "Borrar ${option.value}",
                                             tint = MaterialTheme.colorScheme.error
                                         )
                                     }

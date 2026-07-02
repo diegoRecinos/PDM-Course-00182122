@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.screens.home
+package com.pdm0126.ex_rankeuca.screens.home
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
@@ -33,7 +33,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
-import com.pdm0126.ex_rankeuca_room.data.model.Option
+import com.pdm0126.ex_rankeuca.data.model.Option
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,7 +41,7 @@ fun HomeScreen(
     onNavigateToResultScreen: () -> Unit,
     onNavigateToOptions: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HomeScreenViewModel = viewModel(factory = HomeScreenViewModel.Factory)
+    viewModel: HomeScreenViewModel = viewModel(factory = HomeScreenViewModel.Companion.Factory)
 ) {
 
     val uiState by viewModel.uiState.collectAsState()
@@ -131,7 +131,7 @@ fun OptionItem(
         Column {
             AsyncImage(
                 model = option.imageUrl,
-                contentDescription = option.name,
+                contentDescription = option.value,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(180.dp),
@@ -140,7 +140,7 @@ fun OptionItem(
 
             ListItem(
                 headlineContent = {
-                    Text(option.name, style = MaterialTheme.typography.titleLarge)
+                    Text(option.value, style = MaterialTheme.typography.titleLarge)
                 },
                 supportingContent = {
                     if (isSelected) {

@@ -1,11 +1,11 @@
-package com.pdm0126.ex_rankeuca_room.data.database.dao
+package com.pdm0126.ex_rankeuca.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.pdm0126.ex_rankeuca_room.data.database.entity.OptionEntity
+import com.pdm0126.ex_rankeuca.data.database.entity.OptionEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

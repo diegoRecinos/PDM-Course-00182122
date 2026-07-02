@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.ui.theme
+package com.pdm0126.ex_rankeuca.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

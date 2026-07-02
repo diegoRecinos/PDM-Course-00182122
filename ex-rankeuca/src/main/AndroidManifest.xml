@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BasicTemplate"
-        android:name="com.pdm0126.ex_rankeuca_room.RankeUcaApplication">
+        android:name=".RankeUcaApplication">
         <activity
-            android:name="com.pdm0126.ex_rankeuca_room.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.BasicTemplate">

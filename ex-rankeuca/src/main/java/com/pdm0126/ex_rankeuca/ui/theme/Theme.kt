@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.ui.theme
+package com.pdm0126.ex_rankeuca.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

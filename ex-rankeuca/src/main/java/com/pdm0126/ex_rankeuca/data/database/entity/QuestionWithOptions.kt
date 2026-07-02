@@ -1,8 +1,8 @@
-package com.pdm0126.ex_rankeuca_room.data.database.entity
+package com.pdm0126.ex_rankeuca.data.database.entity
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.pdm0126.ex_rankeuca_room.data.model.Question
+import com.pdm0126.ex_rankeuca.data.model.Question
 
 data class QuestionWithOptions(
     @Embedded val question: QuestionEntity,

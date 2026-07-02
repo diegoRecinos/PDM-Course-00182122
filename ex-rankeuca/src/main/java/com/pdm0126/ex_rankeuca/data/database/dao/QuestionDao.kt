@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.data.database.dao
+package com.pdm0126.ex_rankeuca.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,8 +6,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.pdm0126.ex_rankeuca_room.data.database.entity.QuestionEntity
-import com.pdm0126.ex_rankeuca_room.data.database.entity.QuestionWithOptions
+import com.pdm0126.ex_rankeuca.data.database.entity.QuestionEntity
+import com.pdm0126.ex_rankeuca.data.database.entity.QuestionWithOptions
 import kotlinx.coroutines.flow.Flow
 
 @Dao

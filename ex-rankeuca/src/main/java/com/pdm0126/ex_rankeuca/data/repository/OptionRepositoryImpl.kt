@@ -1,10 +1,10 @@
 package com.pdm0126.ex_rankeuca_room.data.repository
 
-import com.pdm0126.ex_rankeuca_room.data.database.dao.OptionDao
-import com.pdm0126.ex_rankeuca_room.data.database.entity.toEntity
-import com.pdm0126.ex_rankeuca_room.data.database.entity.toModel
+import com.pdm0126.ex_rankeuca.data.database.dao.OptionDao
+import com.pdm0126.ex_rankeuca.data.database.entity.toEntity
+import com.pdm0126.ex_rankeuca.data.database.entity.toModel
 import kotlinx.coroutines.flow.map
-import com.pdm0126.ex_rankeuca_room.data.model.Option
+import com.pdm0126.ex_rankeuca.data.model.Option
 import kotlinx.coroutines.flow.Flow
 
 class OptionRepositoryImpl(
@@ -37,7 +37,7 @@ class OptionRepositoryImpl(
 
     override suspend fun addOption(name: String, imageUrl: String, questionId: Int) {
         val option = Option(
-            name = name,
+            value = name,
             imageUrl = imageUrl,
             questionId = questionId,
             votes = 0

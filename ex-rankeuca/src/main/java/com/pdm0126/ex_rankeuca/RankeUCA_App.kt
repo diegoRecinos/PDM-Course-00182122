@@ -1,16 +1,16 @@
-package com.pdm0126.ex_rankeuca_room
+package com.pdm0126.ex_rankeuca
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
-import com.pdm0126.ex_rankeuca_room.screens.home.HomeScreen
-import com.pdm0126.ex_rankeuca_room.screens.home.HomeScreenViewModel
-import com.pdm0126.ex_rankeuca_room.screens.resultscreen.ResultScreen
-import com.pdm0126.ex_rankeuca_room.screens.resultscreen.ResultScreenViewModel
-import com.pdm0126.ex_rankeuca_room.screens.options.OptionsScreen
-import com.pdm0126.ex_rankeuca_room.screens.questions.QuestionsScreen
+import com.pdm0126.ex_rankeuca.screens.home.HomeScreen
+import com.pdm0126.ex_rankeuca.screens.home.HomeScreenViewModel
+import com.pdm0126.ex_rankeuca.screens.resultscreen.ResultScreen
+import com.pdm0126.ex_rankeuca.screens.resultscreen.ResultScreenViewModel
+import com.pdm0126.ex_rankeuca.screens.options.OptionsScreen
+import com.pdm0126.ex_rankeuca.screens.questions.QuestionsScreen
 
 @Composable
 fun RankeUCA_App() {

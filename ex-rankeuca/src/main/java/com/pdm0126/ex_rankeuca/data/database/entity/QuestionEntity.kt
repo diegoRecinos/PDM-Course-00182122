@@ -1,8 +1,8 @@
-package com.pdm0126.ex_rankeuca_room.data.database.entity
+package com.pdm0126.ex_rankeuca.data.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.pdm0126.ex_rankeuca_room.data.model.Question
+import com.pdm0126.ex_rankeuca.data.model.Question
 
 @Entity(tableName = "questions")
 data class QuestionEntity(

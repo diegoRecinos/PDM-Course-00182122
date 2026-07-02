@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.screens.resultscreen
+package com.pdm0126.ex_rankeuca.screens.resultscreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -67,7 +67,7 @@ fun ResultScreen (
                             option ->
                             ListItem(
                                 headlineContent = {
-                                    Text(option.name, style = MaterialTheme.typography.titleLarge)
+                                    Text(option.value, style = MaterialTheme.typography.titleLarge)
                                 },
                                 supportingContent = {
                                     Text("Votos: ${option.votes}")

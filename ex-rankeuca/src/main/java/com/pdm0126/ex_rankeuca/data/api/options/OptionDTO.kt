@@ -1,6 +1,6 @@
-package com.pdm0126.ex_rankeuca_room.data.api.options
+package com.pdm0126.ex_rankeuca.data.api.options
 
-import com.pdm0126.ex_rankeuca_room.data.model.Option
+import com.pdm0126.ex_rankeuca.data.model.Option
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -16,14 +16,14 @@ data class OptionDTO(
 //mappers
 fun OptionDTO.toModel() = Option(
     id = id,
-    name = name,
+    value = name,
     imageUrl = imageUrl,
     votes = votes
 )
 
 fun Option.toDTO() = OptionDTO(
     id = id,
-    name = name,
+    name = value,
     imageUrl = imageUrl,
     votes = votes
 )

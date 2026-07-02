@@ -1,7 +1,7 @@
 package com.pdm0126.ex_rankeuca_room.data
 
 import android.content.Context
-import com.pdm0126.ex_rankeuca_room.data.database.AppDatabase
+import com.pdm0126.ex_rankeuca.data.database.AppDatabase
 import com.pdm0126.ex_rankeuca_room.data.repository.OptionRepository
 import com.pdm0126.ex_rankeuca_room.data.repository.OptionRepositoryImpl
 import com.pdm0126.ex_rankeuca_room.data.repository.QuestionRepository

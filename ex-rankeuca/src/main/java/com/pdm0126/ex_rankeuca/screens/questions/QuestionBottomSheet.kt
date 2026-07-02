@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.screens.questions
+package com.pdm0126.ex_rankeuca.screens.questions
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

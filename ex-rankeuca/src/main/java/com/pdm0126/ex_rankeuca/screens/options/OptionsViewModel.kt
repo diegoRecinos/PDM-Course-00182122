@@ -1,12 +1,12 @@
-package com.pdm0126.ex_rankeuca_room.screens.options
+package com.pdm0126.ex_rankeuca.screens.options
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.pdm0126.ex_rankeuca_room.RankeUcaApplication
-import com.pdm0126.ex_rankeuca_room.data.model.Option
+import com.pdm0126.ex_rankeuca.RankeUcaApplication
+import com.pdm0126.ex_rankeuca.data.model.Option
 import com.pdm0126.ex_rankeuca_room.data.repository.OptionRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

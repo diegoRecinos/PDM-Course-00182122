@@ -1,9 +1,7 @@
-package com.pdm0126.ex_rankeuca_room.data.api
+package com.pdm0126.ex_rankeuca.data.api
 
-import android.R.attr.level
-import android.net.http.HttpResponseCache.install
 import android.util.Log
-import com.pdm012026.ex_rankeuca_room.BuildConfig
+import com.pdm012026.ex_rankeuca.BuildConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation

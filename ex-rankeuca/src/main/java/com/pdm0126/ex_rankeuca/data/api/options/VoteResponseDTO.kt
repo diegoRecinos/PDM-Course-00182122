@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.data.api.options
+package com.pdm0126.ex_rankeuca.data.api.options
 
 import kotlinx.serialization.Serializable
 

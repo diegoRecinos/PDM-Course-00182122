@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.screens.questions
+package com.pdm0126.ex_rankeuca.screens.questions
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -37,13 +37,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.pdm0126.ex_rankeuca_room.screens.questions.QuestionsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuestionsScreen(
     onQuestionClick: (Int) -> Unit,
     onBack: () -> Unit,
-    viewModel: QuestionsViewModel = viewModel(factory = QuestionsViewModel.Factory)
+    viewModel: QuestionsViewModel = viewModel(factory = QuestionsViewModel.Companion.Factory)
 ) {
     val questions by viewModel.questions.collectAsStateWithLifecycle()
     var showSheet by rememberSaveable { mutableStateOf(false) }

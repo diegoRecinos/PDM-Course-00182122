@@ -1,12 +1,12 @@
 package com.pdm0126.ex_rankeuca_room.data.repository
 
 import android.util.Log
-import com.pdm0126.ex_rankeuca_room.data.api.options.OptionDTO
-import com.pdm0126.ex_rankeuca_room.data.api.options.VoteOptionRequestDTO
-import com.pdm0126.ex_rankeuca_room.data.api.options.VoteResponseDTO
-import com.pdm0126.ex_rankeuca_room.data.api.options.toModel
+import com.pdm0126.ex_rankeuca.data.api.options.OptionDTO
+import com.pdm0126.ex_rankeuca.data.api.options.VoteOptionRequestDTO
+import com.pdm0126.ex_rankeuca.data.api.options.VoteResponseDTO
+import com.pdm0126.ex_rankeuca.data.api.options.toModel
 import io.ktor.client.HttpClient
-import com.pdm0126.ex_rankeuca_room.data.model.Option
+import com.pdm0126.ex_rankeuca.data.model.Option
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.post

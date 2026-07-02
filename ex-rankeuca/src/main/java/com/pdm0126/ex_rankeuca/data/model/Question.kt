@@ -1,6 +1,6 @@
-package com.pdm0126.ex_rankeuca_room.data.model
+package com.pdm0126.ex_rankeuca.data.model
 
-import com.pdm0126.ex_rankeuca_room.data.database.entity.QuestionEntity
+import com.pdm0126.ex_rankeuca.data.database.entity.QuestionEntity
 
 data class Question(
     val id: Int = 0,

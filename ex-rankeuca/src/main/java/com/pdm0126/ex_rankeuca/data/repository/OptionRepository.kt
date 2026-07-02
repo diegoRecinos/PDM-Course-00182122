@@ -1,6 +1,6 @@
 package com.pdm0126.ex_rankeuca_room.data.repository
 
-import com.pdm0126.ex_rankeuca_room.data.model.Option
+import com.pdm0126.ex_rankeuca.data.model.Option
 import kotlinx.coroutines.flow.Flow
 
 interface OptionRepository {

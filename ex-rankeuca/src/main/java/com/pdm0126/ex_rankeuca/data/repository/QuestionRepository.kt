@@ -1,6 +1,6 @@
 package com.pdm0126.ex_rankeuca_room.data.repository
 
-import com.pdm0126.ex_rankeuca_room.data.model.Question
+import com.pdm0126.ex_rankeuca.data.model.Question
 import kotlinx.coroutines.flow.Flow
 
 interface QuestionRepository {

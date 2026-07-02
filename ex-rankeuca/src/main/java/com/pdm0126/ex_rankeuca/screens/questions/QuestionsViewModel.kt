@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.pdm0126.ex_rankeuca_room.RankeUcaApplication
-import com.pdm0126.ex_rankeuca_room.data.model.Question
+import com.pdm0126.ex_rankeuca.RankeUcaApplication
+import com.pdm0126.ex_rankeuca.data.model.Question
 import com.pdm0126.ex_rankeuca_room.data.repository.QuestionRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

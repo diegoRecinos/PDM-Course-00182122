@@ -1,13 +1,13 @@
-package com.pdm0126.ex_rankeuca_room.data.database
+package com.pdm0126.ex_rankeuca.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.pdm0126.ex_rankeuca_room.data.database.dao.OptionDao
-import com.pdm0126.ex_rankeuca_room.data.database.dao.QuestionDao
-import com.pdm0126.ex_rankeuca_room.data.database.entity.OptionEntity
-import com.pdm0126.ex_rankeuca_room.data.database.entity.QuestionEntity
+import com.pdm0126.ex_rankeuca.data.database.dao.OptionDao
+import com.pdm0126.ex_rankeuca.data.database.dao.QuestionDao
+import com.pdm0126.ex_rankeuca.data.database.entity.OptionEntity
+import com.pdm0126.ex_rankeuca.data.database.entity.QuestionEntity
 
 @Database(
     entities = [QuestionEntity::class, OptionEntity::class],

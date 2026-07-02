@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room
+package com.pdm0126.ex_rankeuca
 
 import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
