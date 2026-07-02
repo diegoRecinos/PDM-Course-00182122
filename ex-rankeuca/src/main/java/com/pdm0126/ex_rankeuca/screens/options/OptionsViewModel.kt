@@ -28,7 +28,7 @@ class OptionsViewModel(
 
     fun addOption(name: String, imageUrl: String) {
         viewModelScope.launch {
-            optionRepository.addOption(name, imageUrl, questionId)
+            optionRepository.createOption(name, imageUrl, questionId)
         }
     }
 

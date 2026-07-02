@@ -12,6 +12,7 @@ class OptionRepositoryImpl(
     private val optionDao: OptionDao
 ) : OptionRepository {
 
+    // read: sale de room, son reactivos flow
     override fun getOptions(): Flow<List<Option>> {
         return optionDao.getAllOptions().map { entities ->
             entities.map { it.toModel() }
@@ -24,8 +25,9 @@ class OptionRepositoryImpl(
         }
     }
 
+    // sincronizar: van a la API y guardan en room
     override suspend fun refreshOptions() {
-        // Deshabilitado: Solo Room local
+
     }
 
     override suspend fun voteOption(optionId: Int) {
@@ -36,7 +38,7 @@ class OptionRepositoryImpl(
         optionDao.resetAllVotes()
     }
 
-    override suspend fun addOption(name: String, imageUrl: String, questionId: Int) {
+    override suspend fun createOption(name: String, imageUrl: String, questionId: Int) {
         val option = Option(
             value = name,
             imageUrl = imageUrl,
