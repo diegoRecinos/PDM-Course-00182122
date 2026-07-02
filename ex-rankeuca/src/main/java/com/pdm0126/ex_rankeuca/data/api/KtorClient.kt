@@ -1,7 +1,7 @@
 package com.pdm0126.ex_rankeuca.data.api
 
 import android.util.Log
-import com.pdm012026.ex_rankeuca.BuildConfig
+import com.pdm0126.ex_rankeuca.BuildConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation

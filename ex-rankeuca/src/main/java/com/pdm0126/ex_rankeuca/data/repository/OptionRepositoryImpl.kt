@@ -5,6 +5,7 @@ import com.pdm0126.ex_rankeuca.data.database.entity.toEntity
 import com.pdm0126.ex_rankeuca.data.database.entity.toModel
 import kotlinx.coroutines.flow.map
 import com.pdm0126.ex_rankeuca.data.model.Option
+import com.pdm0126.ex_rankeuca.data.repository.OptionRepository
 import kotlinx.coroutines.flow.Flow
 
 class OptionRepositoryImpl(

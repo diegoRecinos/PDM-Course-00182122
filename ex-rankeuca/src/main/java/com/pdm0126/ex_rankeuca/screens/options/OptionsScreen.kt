@@ -120,7 +120,7 @@ fun OptionsScreen(
                                 },
                                 supportingContent = {
                                     Text(
-                                        text = option.imageUrl,
+                                        text = option.imageUrl ?: "",
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )

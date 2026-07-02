@@ -8,7 +8,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.pdm0126.ex_rankeuca.RankeUcaApplication
 import com.pdm0126.ex_rankeuca.data.model.Option
-import com.pdm0126.ex_rankeuca_room.data.repository.OptionRepository
+import com.pdm0126.ex_rankeuca.data.repository.OptionRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
