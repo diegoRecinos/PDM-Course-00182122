@@ -1,4 +1,4 @@
-package com.pdm0126.ex_mvvm_data_layer_n
+package com.pdm0126.ex_movies
 
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
@@ -8,9 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
-import com.pdm0126.ex_mvvm_data_layer_n.screens.MovieDetail.MovieDetailScreenV2
-import com.pdm0126.ex_mvvm_data_layer_n.screens.MovieList.MovieListScreen
-import java.util.Map.entry
+import com.pdm0126.ex_movies.screens.moviedetail.MovieDetailScreenV2
+import com.pdm0126.ex_movies.screens.movielist.MovieListScreen
 
 @Composable
 fun MovieApp() {

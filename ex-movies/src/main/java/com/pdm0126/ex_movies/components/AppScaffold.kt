@@ -1,4 +1,4 @@
-package com.pdm0126.ex_mvvm_data_layer_n.components
+package com.pdm0126.ex_movies.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize

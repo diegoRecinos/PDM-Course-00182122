@@ -1,4 +1,4 @@
-package com.pdm0126.ex_mvvm_data_layer_n
+package com.pdm0126.ex_movies
 
 import android.os.Bundle
 import android.util.Log
@@ -9,8 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.pdm0126.ex_mvvm_data_layer_n.MovieApp
-import com.pdm0126.ex_mvvm_data_layer_n.ui.theme.PDM_Course_2026Theme
+import com.pdm0126.ex_movies.ui.theme.PDM_Course_2026Theme
 
 private const val TAG = "MainActivity"
 

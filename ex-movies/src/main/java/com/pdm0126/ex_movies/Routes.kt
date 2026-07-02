@@ -1,4 +1,4 @@
-package com.pdm0126.ex_mvvm_data_layer_n
+package com.pdm0126.ex_movies
 
 import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable

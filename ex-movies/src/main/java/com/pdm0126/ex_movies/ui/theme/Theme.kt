@@ -1,4 +1,4 @@
-package com.pdm0126.ex_mvvm_data_layer_n.ui.theme
+package com.pdm0126.ex_movies.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

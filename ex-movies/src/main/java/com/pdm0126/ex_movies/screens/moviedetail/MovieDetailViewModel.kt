@@ -1,10 +1,10 @@
-package com.pdm0126.ex_mvvm_data_layer_n.screens.MovieDetail
+package com.pdm0126.ex_movies.screens.moviedetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pdm0126.ex_mvvm_data_layer_n.data.repositories.MovieRepository.MovieApiRepository
-import com.pdm0126.ex_mvvm_data_layer_n.data.repositories.MovieRepository.MovieRepository
-import com.pdm0126.ex_mvvm_data_layer_n.model.Movie
+import com.pdm0126.ex_movies.data.repositories.movierepository.MovieApiRepository
+import com.pdm0126.ex_movies.data.repositories.movierepository.MovieRepository
+import com.pdm0126.ex_movies.model.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

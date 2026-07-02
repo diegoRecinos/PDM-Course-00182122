@@ -1,4 +1,4 @@
-package com.pdm0126.ex_mvvm_data_layer_n.components
+package com.pdm0126.ex_movies.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.pdm0126.ex_mvvm_data_layer_n.model.Movie
+import com.pdm0126.ex_movies.model.Movie
 
 @Composable
 fun MovieItem(

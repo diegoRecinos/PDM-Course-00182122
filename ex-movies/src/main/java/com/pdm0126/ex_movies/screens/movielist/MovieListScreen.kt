@@ -1,4 +1,4 @@
-package com.pdm0126.ex_mvvm_data_layer_n.screens.MovieList
+package com.pdm0126.ex_movies.screens.movielist
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,8 +13,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.pdm0126.ex_mvvm_data_layer_n.components.AppScaffold
-import com.pdm0126.ex_mvvm_data_layer_n.components.MovieItem
+import com.pdm0126.ex_movies.components.AppScaffold
+import com.pdm0126.ex_movies.components.MovieItem
 
 @Composable
 fun MovieListScreen(

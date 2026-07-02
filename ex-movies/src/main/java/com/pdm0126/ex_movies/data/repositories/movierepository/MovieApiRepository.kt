@@ -1,8 +1,7 @@
-package com.pdm0126.ex_mvvm_data_layer_n.data.repositories.MovieRepository
+package com.pdm0126.ex_movies.data.repositories.movierepository
 
-import com.pdm0126.ex_mvvm_data_layer_n.data.repositories.MovieRepository.MovieRepository
-import com.pdm0126.ex_mvvm_data_layer_n.dummy.dummyMovies
-import com.pdm0126.ex_mvvm_data_layer_n.model.Movie
+import com.pdm0126.ex_movies.dummy.dummyMovies
+import com.pdm0126.ex_movies.model.Movie
 import kotlinx.coroutines.delay
 
 class MovieApiRepository : MovieRepository {

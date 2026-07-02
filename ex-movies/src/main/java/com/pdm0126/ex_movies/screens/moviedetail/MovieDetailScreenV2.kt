@@ -1,4 +1,4 @@
-package com.pdm0126.ex_mvvm_data_layer_n.screens.MovieDetail
+package com.pdm0126.ex_movies.screens.moviedetail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -53,8 +53,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
-import com.pdm0126.ex_mvvm_data_layer_n.components.AppScaffold
-import com.pdm0126.ex_mvvm_data_layer_n.model.Movie
+import com.pdm0126.ex_movies.components.AppScaffold
+import com.pdm0126.ex_movies.model.Movie
 import kotlinx.coroutines.launch
 
 private val genreNames = mapOf(

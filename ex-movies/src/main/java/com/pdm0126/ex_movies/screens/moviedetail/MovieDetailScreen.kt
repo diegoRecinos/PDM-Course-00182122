@@ -1,4 +1,4 @@
-package com.pdm0126.ex_mvvm_data_layer_n.screens.MovieDetail
+package com.pdm0126.ex_movies.screens.moviedetail
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,9 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
-import com.pdm0126.ex_mvvm_data_layer_n.dummy.dummyMovies
-import com.pdm0126.ex_mvvm_data_layer_n.components.AppScaffold
-import com.pdm0126.ex_mvvm_data_layer_n.dummy.dummyMovies
+import com.pdm0126.ex_movies.components.AppScaffold
 
 @Composable
 fun MovieDetailScreen(
