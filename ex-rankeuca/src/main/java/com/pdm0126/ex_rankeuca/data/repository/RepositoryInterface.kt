@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.data.repository
+package com.pdm0126.ex_rankeuca.data.repository
 
 import com.pdm0126.ex_rankeuca.data.model.Option
 

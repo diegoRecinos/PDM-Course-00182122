@@ -11,7 +11,7 @@ import com.pdm0126.ex_rankeuca.data.database.entity.QuestionEntity
 
 @Database(
     entities = [QuestionEntity::class, OptionEntity::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -30,7 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
                     klass = AppDatabase::class.java,
                     name = "rankeuca_database"
                 )
-                    .fallbackToDestructiveMigration(false)
+                    .fallbackToDestructiveMigration(true)
                     .build()
                     .also { INSTANCE = it }
             }

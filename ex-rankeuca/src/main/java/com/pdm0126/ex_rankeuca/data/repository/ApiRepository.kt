@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca_room.data.repository
+package com.pdm0126.ex_rankeuca.data.repository
 
 import android.util.Log
 import com.pdm0126.ex_rankeuca.data.api.options.OptionDTO
