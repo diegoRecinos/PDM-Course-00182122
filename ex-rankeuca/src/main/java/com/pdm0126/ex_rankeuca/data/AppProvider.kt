@@ -1,11 +1,11 @@
-package com.pdm0126.ex_rankeuca_room.data
+package com.pdm0126.ex_rankeuca.data
 
 import android.content.Context
 import com.pdm0126.ex_rankeuca.data.database.AppDatabase
-import com.pdm0126.ex_rankeuca.data.repository.OptionRepository
-import com.pdm0126.ex_rankeuca.data.repository.OptionRepositoryImpl
-import com.pdm0126.ex_rankeuca.data.repository.QuestionRepository
-import com.pdm0126.ex_rankeuca.data.repository.QuestionRepositoryImpl
+import com.pdm0126.ex_rankeuca.data.repository.optionrepository.OptionRepository
+import com.pdm0126.ex_rankeuca.data.repository.optionrepository.OptionRepositoryImpl
+import com.pdm0126.ex_rankeuca.data.repository.questionrepository.QuestionRepository
+import com.pdm0126.ex_rankeuca.data.repository.questionrepository.QuestionRepositoryImpl
 
 class AppProvider(context: Context) {
 

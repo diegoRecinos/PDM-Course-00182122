@@ -1,4 +1,4 @@
-package com.pdm0126.ex_rankeuca.data.repository
+package com.pdm0126.ex_rankeuca.data.repository.questionrepository
 
 import com.pdm0126.ex_rankeuca.data.database.dao.QuestionDao
 import com.pdm0126.ex_rankeuca.data.database.entity.QuestionEntity
