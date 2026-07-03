@@ -33,7 +33,7 @@ fun RankeUCA_App() {
             backStack.add(Routes.Questions)
           },
           onNavigateToVote = {
-
+            backStack.add(Routes.Home)
           }
         )
       }

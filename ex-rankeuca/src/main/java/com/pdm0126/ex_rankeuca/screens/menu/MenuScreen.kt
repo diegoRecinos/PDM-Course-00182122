@@ -60,8 +60,7 @@ fun MenuScreen(
                 description = "Participa en las votaciones activas.",
                 icon = Icons.Default.HowToVote,
                 onClick = onNavigateToVote,
-                enabled = false,
-                badge = "Proximamente"
+                enabled = true,
             )
         }
     }
