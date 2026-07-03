@@ -4,6 +4,7 @@ import android.util.Log
 import com.pdm0126.ex_rankeuca.data.api.KtorClient
 import com.pdm0126.ex_rankeuca.data.api.options.OptionDTO
 import com.pdm0126.ex_rankeuca.data.api.options.OptionRequestDTO
+import com.pdm0126.ex_rankeuca.data.api.options.VoteOptionRequestDTO
 import com.pdm0126.ex_rankeuca.data.api.options.toDTO
 import com.pdm0126.ex_rankeuca.data.database.dao.OptionDao
 import com.pdm0126.ex_rankeuca.data.database.entity.toEntity
@@ -101,7 +102,9 @@ class OptionRepositoryImpl(
     //mutar API -> luego local refreshOptions()
     override suspend fun voteOption(optionId: Int) {
         try {
-            KtorClient.client.post("vote/$optionId")
+            KtorClient.client.post("vote") {
+                setBody(VoteOptionRequestDTO(optionId))
+            }
             //tras exito, actualizamos Room
             optionDao.incrementVotes(optionId)
         } catch (e: Exception) {
