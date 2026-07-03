@@ -8,6 +8,8 @@ interface QuestionRepository {
     fun getQuestions(): Flow<List<Question>>
 
     //sincronizar: van a la API y guardan en room
+
+    suspend fun refreshQuestions()
     suspend fun addQuestion(title: String)
     suspend fun updateQuestion(question: Question)
     suspend fun deleteQuestion(question: Question)

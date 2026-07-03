@@ -37,11 +37,9 @@ class OptionRepositoryImpl(
     // sincronizar: van a la API (DTO) -> Room (Entity)
     // El Flow de arriba se encarga de actualizar la UI automáticamente
     override suspend fun refreshOptions() {
-        try {// En un caso real, aquí decidirías qué questionId usar
-            // o si la API trae el questionId dentro del DTO.
+        try {
             val optionsDto = fetchOptionsFromApi()
 
-            // Mapeo directo DTO -> Entity
             optionDao.upsertAllOptions(optionsDto.map { it.toEntity() })
 
         } catch (e: Exception) {
