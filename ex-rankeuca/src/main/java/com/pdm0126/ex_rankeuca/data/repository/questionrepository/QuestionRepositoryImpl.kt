@@ -8,8 +8,10 @@ import com.pdm0126.ex_rankeuca.data.database.entity.QuestionEntity
 import com.pdm0126.ex_rankeuca.data.database.entity.toModel
 import com.pdm0126.ex_rankeuca.data.model.Question
 import io.ktor.client.call.body
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
+import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -52,8 +54,8 @@ class QuestionRepositoryImpl(
 
     override suspend fun updateQuestion(question: Question) {
         try {
-            KtorClient.client.post("questions/${question.id}") {
-                setBody(question)
+            KtorClient.client.put("questions/${question.id}") {
+                setBody(mapOf("title" to question.title))
             }
             questionDao.upsertQuestion(QuestionEntity(id = question.id, title = question.title))
         } catch (e: Exception) {
@@ -63,7 +65,7 @@ class QuestionRepositoryImpl(
 
     override suspend fun deleteQuestion(question: Question) {
         try {
-            KtorClient.client.post("questions/${question.id}")
+            KtorClient.client.delete("questions/${question.id}")
             questionDao.deleteQuestion(QuestionEntity(id = question.id, title = question.title))
         } catch (e: Exception) {
             throw e
