@@ -53,21 +53,33 @@ class OptionsViewModel(
             }
         }
     }
-    fun addOption(name: String, imageUrl: String) {
-        viewModelScope.launch {
-            optionRepository.createOption(name, imageUrl, questionId)
+    fun addOption(name: String, imageUrl: String?) {
+        try {
+            viewModelScope.launch {
+                optionRepository.createOption(name, imageUrl, questionId)
+            }
+        } catch (e: Exception) {
+            errorMessage = "Error al crear opción: ${e.message}"
         }
     }
 
     fun updateOption(option: Option) {
-        viewModelScope.launch {
-            optionRepository.updateOption(option)
+        try {
+            viewModelScope.launch {
+                optionRepository.updateOption(option)
+            }
+        } catch (e: Exception) {
+            errorMessage = "Error al actualizar opción: ${e.message}"
         }
     }
 
     fun deleteOption(option: Option) {
-        viewModelScope.launch {
-            optionRepository.deleteOption(option)
+        try {
+            viewModelScope.launch {
+                optionRepository.deleteOption(option)
+            }
+        } catch (e: Exception) {
+            errorMessage = "Error al eliminar opción: ${e.message}"
         }
     }
 

@@ -29,14 +29,14 @@ import com.pdm0126.ex_rankeuca.data.model.Option
 @Composable
 fun OptionBottomSheet(
     option: Option? = null,
-    onSave: (name: String, imageUrl: String) -> Unit,
+    onSave: (name: String, imageUrl: String?) -> Unit,
     onDismiss: () -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState()
     var name by rememberSaveable { mutableStateOf(option?.value ?: "") }
     var imageUrl by rememberSaveable { mutableStateOf(option?.imageUrl ?: "") }
 
-    val isValid = name.isNotBlank() && imageUrl.isNotBlank()
+    val isValid = name.isNotBlank()
     val isEditing = option != null
 
     ModalBottomSheet(
@@ -86,7 +86,8 @@ fun OptionBottomSheet(
                 Button(
                     onClick = {
                         if (isValid) {
-                            onSave(name.trim(), imageUrl.trim())
+                            val finalImageUrl = if (imageUrl.isBlank()) null else imageUrl.trim()
+                            onSave(name.trim(), finalImageUrl)
                             onDismiss()
                         }
                     },

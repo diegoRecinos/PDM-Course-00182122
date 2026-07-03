@@ -9,6 +9,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.pdm0126.ex_rankeuca.RankeUcaApplication
 import com.pdm0126.ex_rankeuca.data.model.Option
 import com.pdm0126.ex_rankeuca.data.repository.optionrepository.OptionRepository
+import com.pdm0126.ex_rankeuca.data.repository.questionrepository.QuestionRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -27,7 +28,8 @@ data class HomeScreenUIState(
 )
 
 class HomeScreenViewModel(
-    private val repository: OptionRepository
+    private val repository: OptionRepository,
+    private val questionRepository: QuestionRepository
 ) : ViewModel() {
 
     // Estado interno para flags loading, voting, errores
@@ -56,6 +58,9 @@ class HomeScreenViewModel(
         viewModelScope.launch {
             _internalState.update { it.copy(isLoading = true, error = null) }
             try {
+
+                questionRepository.refreshQuestions()
+
                 repository.refreshOptions()
                 _internalState.update { it.copy(isLoading = false) }
             } catch (e: Exception) {
@@ -92,7 +97,11 @@ class HomeScreenViewModel(
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val app = this[APPLICATION_KEY] as RankeUcaApplication
-                HomeScreenViewModel(app.appProvider.provideOptionRepository())
+                HomeScreenViewModel(
+                    app.appProvider.provideOptionRepository(),
+                    app.appProvider.provideQuestionRepository()
+                )
+
             }
         }
     }

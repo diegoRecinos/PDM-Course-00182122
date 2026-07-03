@@ -60,11 +60,22 @@ class OptionRepositoryImpl(
         optionDao.resetAllVotes()
     }
 
-    override suspend fun createOption(name: String, imageUrl: String, questionId: Int) {
+    override suspend fun createOption(name: String, imageUrl: String?, questionId: Int) {
         //1 llamar API
 
         val response = KtorClient.client.post("options") {
-            setBody(mapOf("name" to name, "imageUrl" to imageUrl, "questionId" to questionId))
+
+            val bodyData = mutableMapOf<String, Any?>(
+                "name" to name,
+                "questionId" to questionId
+            )
+            // Solo agregamos imageUrl si no es nulo
+            if (imageUrl != null) {
+                bodyData["imageUrl"] = imageUrl
+            }
+
+            setBody(bodyData)
+
         }.body<OptionDTO>()
 
         //guardar resultado real con ID de la API en room

@@ -13,7 +13,7 @@ interface OptionRepository {
     suspend fun refreshOptions()
 
     //mutar API -> luego refreshOptions()
-    suspend fun createOption(name: String, imageUrl: String, questionId: Int)
+    suspend fun createOption(name: String, imageUrl: String?, questionId: Int)
     suspend fun updateOption(option: Option)
     suspend fun deleteOption(option: Option)
 

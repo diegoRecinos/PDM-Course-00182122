@@ -8,8 +8,8 @@ import kotlinx.serialization.Serializable
 data class OptionDTO(
     val id: Int,
     val name: String,
-    val imageUrl: String?,
-    val votes: Int,
+    val imageUrl: String? = null,
+    val votes: Int = 0,
     val questionId: Int
 ){
 
