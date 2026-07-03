@@ -3,6 +3,8 @@ package com.pdm0126.ex_rankeuca.data.repository.optionrepository
 import android.util.Log
 import com.pdm0126.ex_rankeuca.data.api.KtorClient
 import com.pdm0126.ex_rankeuca.data.api.options.OptionDTO
+import com.pdm0126.ex_rankeuca.data.api.options.OptionRequestDTO
+import com.pdm0126.ex_rankeuca.data.api.options.toDTO
 import com.pdm0126.ex_rankeuca.data.database.dao.OptionDao
 import com.pdm0126.ex_rankeuca.data.database.entity.toEntity
 import com.pdm0126.ex_rankeuca.data.database.entity.toModel
@@ -51,45 +53,19 @@ class OptionRepositoryImpl(
         }
     }
 
-    //mutar API -> luego local refreshOptions()
-    override suspend fun voteOption(optionId: Int) {
-        try {
-            KtorClient.client.post("vote/$optionId")
-            //tras exito, actualizamos Room
-            optionDao.incrementVotes(optionId)
-        } catch (e: Exception) {
-            Log.e("OptionRepositoryImpl", "Error al votar opción: ${e.message}")
-            throw e
-        }
-    }
-
-    override suspend fun resetVotes() {
-        KtorClient.client.post("reset")
-
-        optionDao.resetAllVotes()
-    }
-
     override suspend fun createOption(name: String, imageUrl: String?, questionId: Int) {
         //1 llamar API
 
         try {
             val response = KtorClient.client.post("options") {
 
-                val bodyData = mutableMapOf<String, Any?>(
-                    "name" to name,
-                    "questionId" to questionId
-                )
-                // Solo agregamos imageUrl si no es nulo
-                if (imageUrl != null) {
-                    bodyData["imageUrl"] = imageUrl
-                }
-
-                setBody(bodyData)
+                setBody(OptionRequestDTO(name, imageUrl, questionId))
 
             }.body<OptionDTO>()
 
             //guardar resultado real con ID de la API en room
             optionDao.upsertOption(response.toEntity())
+
         } catch (e: Exception) {
             Log.e("OptionRepositoryImpl", "Error al crear opción: ${e.message}")
             throw e
@@ -100,7 +76,7 @@ class OptionRepositoryImpl(
 
         try {
             KtorClient.client.put("options/${option.id}"){
-                setBody(option.toEntity())
+                setBody(option.toDTO())
             }
 
             optionDao.upsertOption(option.toEntity())
@@ -120,6 +96,24 @@ class OptionRepositoryImpl(
             Log.e("OptionRepositoryImpl", "Error al eliminar opción: ${e.message}")
             throw e
         }
+    }
+
+    //mutar API -> luego local refreshOptions()
+    override suspend fun voteOption(optionId: Int) {
+        try {
+            KtorClient.client.post("vote/$optionId")
+            //tras exito, actualizamos Room
+            optionDao.incrementVotes(optionId)
+        } catch (e: Exception) {
+            Log.e("OptionRepositoryImpl", "Error al votar opción: ${e.message}")
+            throw e
+        }
+    }
+
+    override suspend fun resetVotes() {
+        KtorClient.client.post("reset")
+
+        optionDao.resetAllVotes()
     }
 
     //Helper privado devuelve DTO
