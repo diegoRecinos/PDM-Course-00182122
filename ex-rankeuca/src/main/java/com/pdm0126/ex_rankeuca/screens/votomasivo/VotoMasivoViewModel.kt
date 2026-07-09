@@ -37,10 +37,10 @@ class VotoMasivoViewModel(
 ) : ViewModel() {
 
     // Estado interno para flags loading, voting, errores
-    private val _internalState = MutableStateFlow(HomeScreenUIState())
+    private val _internalState = MutableStateFlow(VotoMasivoUIState())
 
     // Combinamos el Flow vivo de Room con nuestro estado interno de la UI
-    val uiState: StateFlow<HomeScreenUIState> = combine(
+    val uiState: StateFlow<VotoMasivoUIState> = combine(
         repository.getOptions(),
         _internalState
     ) { options, internal ->
@@ -50,7 +50,7 @@ class VotoMasivoViewModel(
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = HomeScreenUIState(isLoading = true)
+        initialValue = VotoMasivoUIState(isLoading = true)
     )
 
     init {

@@ -32,7 +32,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MenuScreen(
     onNavigateToManager: () -> Unit,
-    onNavigateToVote: () -> Unit
+    onNavigateToVote: () -> Unit,
+    onNavigateToMasivo: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -66,7 +67,7 @@ fun MenuScreen(
                 title = "Voto Masivo",
                 description = "Responder todas las preguntas",
                 icon = Icons.Default.HowToVote,
-                onClick = onNavigateToVote,
+                onClick = onNavigateToMasivo,
                 enabled = true,
             )
         }
