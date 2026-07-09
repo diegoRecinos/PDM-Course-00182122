@@ -1,28 +1,73 @@
-package com.pdm0126.ex_mvvm_data_layer_n.screens.MovieDetail
+package com.pdm0126.ex_movies.screens.moviedetail
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.pdm0126.ex_movies.data.repositories.movierepository.MovieRepositoryImpl
-import com.pdm0126.ex_movies.data.repositories.movierepository.MovieRepository
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.pdm0126.ex_movies.MoviesAppProviderApp
 import com.pdm0126.ex_movies.data.model.Movie
+import com.pdm0126.ex_movies.data.repositories.movierepository.MovieRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class MovieDetailViewModel : ViewModel() {
-  private val movieRepository: MovieRepository = MovieRepositoryImpl()
+class MovieDetailViewModel(
+    private val movieRepository: MovieRepository
+) : ViewModel() {
 
-  private val _movie = MutableStateFlow<Movie?>(null)
-  val movie = _movie.asStateFlow()
+    private val _movieId = MutableStateFlow<Int?>(null)
 
-  private val _loading = MutableStateFlow<Boolean>(false)
-  val loading = _loading.asStateFlow()
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val movie: StateFlow<Movie?> = _movieId
+        .flatMapLatest { id ->
+            if (id == null) MutableStateFlow(null)
+            else movieRepository.getMovieById(id)
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = null
+        )
 
-  fun loadMovieById(id: Int) {
-    viewModelScope.launch {
-      _loading.value = true
-      _movie.value = movieRepository.getMovieById(id)
-      _loading.value = false
+    private val _loading = MutableStateFlow(false)
+    val loading = _loading.asStateFlow()
+
+    private val _error = MutableStateFlow<String?>(null)
+    val error = _error.asStateFlow()
+
+    fun setMovieId(id: Int) {
+        if (_movieId.value == id) return
+        _movieId.value = id
+        refreshMovie(id)
     }
-  }
+
+    private fun refreshMovie(id: Int) {
+        viewModelScope.launch {
+            _loading.value = true
+            _error.value = null
+            try {
+                movieRepository.refreshMovieById(id)
+            } catch (e: Exception) {
+                _error.value = "Error al actualizar detalle: ${e.message}"
+            } finally {
+                _loading.value = false
+            }
+        }
+    }
+
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val application = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as MoviesAppProviderApp)
+                val repository = application.appProvider.provideMovieRepository()
+                MovieDetailViewModel(repository)
+            }
+        }
+    }
 }

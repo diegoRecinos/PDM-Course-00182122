@@ -1,4 +1,4 @@
-package com.pdm0126.ex_mvvm_data_layer_n.dummy
+package com.pdm0126.ex_movies.dummy
 
 import com.pdm0126.ex_movies.data.model.Movie
 

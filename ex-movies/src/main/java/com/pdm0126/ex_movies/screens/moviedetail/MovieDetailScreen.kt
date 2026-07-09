@@ -1,4 +1,4 @@
-package com.pdm0126.ex_mvvm_data_layer_n.screens.MovieDetail
+package com.pdm0126.ex_movies.screens.moviedetail
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,35 +27,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
-import com.pdm0126.ex_mvvm_data_layer_n.dummy.dummyMovies
-import com.pdm0126.ex_mvvm_data_layer_n.components.AppScaffold
-import com.pdm0126.ex_mvvm_data_layer_n.dummy.dummyMovies
+import com.pdm0126.ex_movies.components.AppScaffold
 
 @Composable
 fun MovieDetailScreen(
   movieId: Int,
   navigateBack: () -> Unit,
-  viewModel: MovieDetailViewModel = viewModel()
+  viewModel: MovieDetailViewModel = viewModel(factory = MovieDetailViewModel.Factory)
 ) {
-  //val movie = dummyMovies.find { it.id == movieId }
-
-  //observar el estado del ViewModel
   val movie by viewModel.movie.collectAsState()
-
   val loading by viewModel.loading.collectAsState()
+  val error by viewModel.error.collectAsState()
 
-  //cargar la pelicula
   LaunchedEffect(movieId) {
-    viewModel.loadMovieById(movieId)
-  }
-
-  if (loading) {
-    AppScaffold(title = "Loading") { padding ->
-      Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
-        CircularProgressIndicator()
-      }
-    }
-    return
+    viewModel.setMovieId(movieId)
   }
 
   AppScaffold(
@@ -69,57 +54,64 @@ fun MovieDetailScreen(
       }
     }
   ) { padding ->
-    movie?.let {
-      Column(
-        modifier = Modifier
-          .fillMaxSize()
-          .padding(padding)
-          .verticalScroll(rememberScrollState())
-      ) {
-        AsyncImage(
-          model = it.backdropUrl,
-          contentDescription = it.title,
-          modifier = Modifier
-            .fillMaxWidth()
-            .height(220.dp),
-          contentScale = ContentScale.Crop
-        )
-        Column(modifier = Modifier.padding(16.dp)) {
-          Text(
-            text = it.title,
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold
-          )
-          Spacer(modifier = Modifier.height(4.dp))
-          Text(
-            text = it.originalTitle,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-          )
-          Spacer(modifier = Modifier.height(8.dp))
-          Text(
-            text = "Rating: ${"%.2f".format(it.voteAverage)}  -  ${it.releaseDate}",
-            style = MaterialTheme.typography.bodyMedium
-          )
-          Spacer(modifier = Modifier.height(8.dp))
-          Text(
-            text = "Popularidad: ${"%.1f".format(it.popularity)}",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-          )
-          Spacer(modifier = Modifier.height(16.dp))
-          Text(
-            text = "Sinopsis",
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold
-          )
-          Spacer(modifier = Modifier.height(4.dp))
-          Text(
-            text = it.overview,
-            style = MaterialTheme.typography.bodyMedium
-          )
+    Box(modifier = Modifier.fillMaxSize().padding(padding)) {
+        if (movie == null && loading) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+        } else if (movie == null && error != null) {
+            Text(text = error!!, modifier = Modifier.align(Alignment.Center))
+        } else {
+            movie?.let {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    AsyncImage(
+                        model = it.backdropUrl,
+                        contentDescription = it.title,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(220.dp),
+                        contentScale = ContentScale.Crop
+                    )
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = it.title,
+                            style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = it.originalTitle,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Rating: ${"%.2f".format(it.voteAverage)}  -  ${it.releaseDate}",
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Popularidad: ${"%.1f".format(it.popularity)}",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "Sinopsis",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = it.overview,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
+                }
+            }
         }
-      }
     }
   }
 }
