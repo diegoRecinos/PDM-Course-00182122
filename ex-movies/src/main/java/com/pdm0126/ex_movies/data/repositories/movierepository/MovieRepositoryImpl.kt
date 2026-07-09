@@ -5,21 +5,19 @@ import com.pdm0126.ex_movies.data.api.movies.MovieDto
 import com.pdm0126.ex_movies.data.api.movies.toEntity
 import com.pdm0126.ex_movies.data.api.movies.toModel
 import com.pdm0126.ex_movies.data.database.dao.MovieDao
-import com.pdm0126.ex_mvvm_data_layer_n.dummy.dummyMovies
 import com.pdm0126.ex_movies.data.model.Movie
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlin.collections.map
 
 import com.pdm0126.ex_movies.data.api.movies.GetMoviesResponseDto
 
-class MovieApiOfflineFirstRepository(
+class MovieRepositoryImpl(
   private val dao: MovieDao
-): MovieOfflineFirstRepository {
+): MovieRepository {
 
   // Room manda: la UI siempre observa esto
   override fun getMovies(): Flow<List<Movie>> =
