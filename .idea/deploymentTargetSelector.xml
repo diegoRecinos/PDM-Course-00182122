@@ -2,13 +2,13 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
-      <SelectionState runConfigName="basic-concepts-jetpack-compose">
+      <SelectionState runConfigName="ex-dice-roller">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="ex2-task-admin">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ex-dice-roller">
+      <SelectionState runConfigName="ex1-basic-concepts-jetpack-compose">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="ex-tip-calculator">
@@ -17,10 +17,10 @@
       <SelectionState runConfigName="ex-api-json-placeholder">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ex-rankeuca">
+      <SelectionState runConfigName="ex-movies">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ex-movies">
+      <SelectionState runConfigName="ex-rankeuca">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

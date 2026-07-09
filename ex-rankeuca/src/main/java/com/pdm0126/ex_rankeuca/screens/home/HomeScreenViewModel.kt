@@ -41,8 +41,7 @@ class HomeScreenViewModel(
         _internalState
     ) { options, internal ->
         internal.copy(
-            options = options.sortedByDescending { it.votes },
-            isLoading = if (options.isNotEmpty()) false else internal.isLoading
+            options = options.sortedByDescending { it.votes }
         )
     }.stateIn(
         scope = viewModelScope,
@@ -58,9 +57,7 @@ class HomeScreenViewModel(
         viewModelScope.launch {
             _internalState.update { it.copy(isLoading = true, error = null) }
             try {
-
                 questionRepository.refreshQuestions()
-
                 repository.refreshOptions()
                 _internalState.update { it.copy(isLoading = false) }
             } catch (e: Exception) {
