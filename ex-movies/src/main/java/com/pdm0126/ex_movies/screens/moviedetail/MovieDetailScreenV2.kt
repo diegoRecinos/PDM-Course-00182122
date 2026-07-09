@@ -77,7 +77,7 @@ private val genreNames = mapOf(
 fun MovieDetailScreenV2(
   movieId: Int,
   navigateBack: () -> Unit,
-  viewModel: MovieDetailViewModel = viewModel()
+  viewModel: MovieDetailViewModel = viewModel(factory = MovieDetailViewModel.Factory)
 ) {
   val movie by viewModel.movie.collectAsState()
   val loading by viewModel.loading.collectAsState()
@@ -86,7 +86,7 @@ fun MovieDetailScreenV2(
   val scope = rememberCoroutineScope()
 
   LaunchedEffect(movieId) {
-    viewModel.movie
+    viewModel.setMovieId(movieId)
   }
 
   if (loading) {
