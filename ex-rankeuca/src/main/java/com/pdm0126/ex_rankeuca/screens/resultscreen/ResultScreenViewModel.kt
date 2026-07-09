@@ -38,7 +38,6 @@ class ResultScreenViewModel(
     )
 
     fun fetchOptions() {
-        // En Room local, los cambios fluyen automáticamente por el Flow.
     }
 
     fun resetAllVotes() {

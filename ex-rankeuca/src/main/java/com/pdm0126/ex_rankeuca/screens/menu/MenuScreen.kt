@@ -62,6 +62,13 @@ fun MenuScreen(
                 onClick = onNavigateToVote,
                 enabled = true,
             )
+            MenuCard(
+                title = "Voto Masivo",
+                description = "Responder todas las preguntas",
+                icon = Icons.Default.HowToVote,
+                onClick = onNavigateToVote,
+                enabled = true,
+            )
         }
     }
 }

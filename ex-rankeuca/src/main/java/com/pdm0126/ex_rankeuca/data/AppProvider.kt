@@ -27,4 +27,9 @@ class AppProvider(context: Context) {
     fun provideOptionRepository(): OptionRepository {
         return optionRepository
     }
+
+    fun provideQuestionWithOptionsRepository(): QuestionWithOptionsRepository {
+        return QuestionWithOptionsRepositoryImpl(questionDao, optionDao)
+    }
+
 }
