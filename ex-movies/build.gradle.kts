@@ -28,7 +28,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        val apiToken = localProperties.getProperty("API_KEY")
+        val apiToken = localProperties.getProperty("API_KEY_TMDB")
 
         buildConfigField("String", "API_TOKEN", "\"$apiToken\"")
     }

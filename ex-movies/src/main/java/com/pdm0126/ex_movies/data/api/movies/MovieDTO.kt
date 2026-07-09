@@ -2,6 +2,7 @@ package com.pdm0126.ex_movies.data.api.movies
 
 import com.pdm0126.ex_movies.data.database.entity.MovieEntity
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerialName
 import com.pdm0126.ex_movies.data.model.Movie
 
 
@@ -9,16 +10,23 @@ import com.pdm0126.ex_movies.data.model.Movie
 data class MovieDto(
     val id: Int,
     val title: String,
+    @SerialName("original_title")
     val originalTitle: String,
+    @SerialName("original_language")
     val originalLanguage: String,
     val overview: String,
+    @SerialName("release_date")
     val releaseDate: String,
     val adult: Boolean,
     val popularity: Double,
+    @SerialName("vote_average")
     val voteAverage: Double,
+    @SerialName("vote_count")
     val voteCount: Int,
     val video: Boolean,
+    @SerialName("backdrop_path")
     val backdropPath: String? = null,
+    @SerialName("poster_path")
     val posterPath: String? = null
 )
 
