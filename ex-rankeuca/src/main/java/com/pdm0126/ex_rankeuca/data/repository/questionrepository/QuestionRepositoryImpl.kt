@@ -31,10 +31,11 @@ class QuestionRepositoryImpl(
     override suspend fun refreshQuestions() {
         try {
             val questionsDto = fetchQuestionsFromApi()
-
+            
+            // Offline First: Limpiamos para que lo borrado en el server también se borre aquí
+            questionDao.deleteAllQuestions()
             questionDao.upsertAllQuestions(questionsDto.map { it.toEntity() })
         } catch (e: Exception) {
-
             throw e
         }
     }

@@ -40,4 +40,7 @@ interface OptionDao {
 
     @Query("UPDATE options SET votes = 0")
     suspend fun resetAllVotes()
+
+    @Query("DELETE FROM options")
+    suspend fun deleteAllOptions()
 }

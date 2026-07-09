@@ -33,4 +33,7 @@ interface QuestionDao {
 
     @Delete
     suspend fun deleteQuestion(question: QuestionEntity)
+
+    @Query("DELETE FROM questions")
+    suspend fun deleteAllQuestions()
 }
