@@ -1,4 +1,4 @@
-package com.pdm0126.ex_mvvm_data_layer_n.model
+package com.pdm0126.ex_movies.data.model
 
 data class Movie(
   val id: Int,

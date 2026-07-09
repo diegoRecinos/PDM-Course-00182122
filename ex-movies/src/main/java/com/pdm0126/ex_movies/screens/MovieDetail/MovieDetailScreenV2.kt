@@ -54,7 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.pdm0126.ex_mvvm_data_layer_n.components.AppScaffold
-import com.pdm0126.ex_mvvm_data_layer_n.model.Movie
+import com.pdm0126.ex_movies.data.model.Movie
 import kotlinx.coroutines.launch
 
 private val genreNames = mapOf(

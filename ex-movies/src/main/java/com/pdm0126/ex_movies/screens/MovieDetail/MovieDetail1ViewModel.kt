@@ -2,15 +2,15 @@ package com.pdm0126.ex_mvvm_data_layer_n.screens.MovieDetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pdm0126.ex_mvvm_data_layer_n.data.repositories.MovieRepository.MovieApiRepository
-import com.pdm0126.ex_mvvm_data_layer_n.data.repositories.MovieRepository.MovieRepository
-import com.pdm0126.ex_mvvm_data_layer_n.model.Movie
+import com.pdm0126.ex_movies.data.repositories.movierepository.MovieApiOfflineFirstRepository
+import com.pdm0126.ex_movies.data.repositories.movierepository.MovieOfflineFirstRepository
+import com.pdm0126.ex_movies.data.model.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MovieDetail1ViewModel : ViewModel() {
-    private val movieRepository: MovieRepository = MovieApiRepository()
+    private val movieOfflineFirstRepository: MovieOfflineFirstRepository = MovieApiOfflineFirstRepository()
 
     private val _movie = MutableStateFlow<Movie?>(null)
 
@@ -23,7 +23,7 @@ class MovieDetail1ViewModel : ViewModel() {
     fun loadMovie(movieId: Int) {
         viewModelScope.launch {
             _loading.value = true
-            _movie.value = movieRepository.getMovieById(movieId)
+            _movie.value = movieOfflineFirstRepository.getMovieById(movieId)
             _loading.value = false
         }
     }

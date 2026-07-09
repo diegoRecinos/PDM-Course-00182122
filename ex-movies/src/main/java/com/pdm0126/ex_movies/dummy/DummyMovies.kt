@@ -1,6 +1,6 @@
 package com.pdm0126.ex_mvvm_data_layer_n.dummy
 
-import com.pdm0126.ex_mvvm_data_layer_n.model.Movie
+import com.pdm0126.ex_movies.data.model.Movie
 
 val dummyMovies = listOf(
   Movie(
